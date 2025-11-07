@@ -1,6 +1,6 @@
-# 🏥 Clinic Management System – Spring Boot Project
+ Clinic Management System – Spring Boot Project
 
-## 📘 Project Overview
+ Project Overview
 This project is a **Clinic Management System** developed as part of the **DS1 Web Development – Spring Boot** module.  
 It aims to manage and organize essential clinic operations such as **patients, doctors, appointments, and invoices** using a RESTful backend architecture.
 
@@ -8,7 +8,7 @@ The project demonstrates complete CRUD functionality, entity relationships, and 
 
 ---
 
-## 🧠 Objective
+ Objective
 To design and implement a **Spring Boot REST API** that allows efficient management of clinic data, showcasing:
 - Entity modeling and relationships
 - CRUD operations
@@ -17,7 +17,7 @@ To design and implement a **Spring Boot REST API** that allows efficient managem
 
 ---
 
-## 🛠️ Technologies Used
+ Technologies Used
 - **Spring Boot** (Backend framework)
 - **Spring Data JPA** (ORM for database operations)
 - **MySQL** (Relational database)
@@ -28,7 +28,7 @@ To design and implement a **Spring Boot REST API** that allows efficient managem
 
 ---
 
-## 🏗️ Project Structure
+ Project Structure
 ```
 src/
  ├─ main/java/com/example/clinic/
@@ -44,21 +44,21 @@ src/
 
 ---
 
-## 🧩 Entities and Relationships
+ Entities and Relationships
 
-### 1. **Patient**
+ 1. **Patient**
 - `id`, `name`, `age`, `gender`, `phoneNumber`
 - A patient can have **multiple appointments**
 
-### 2. **Doctor**
+ 2. **Doctor**
 - `id`, `name`, `specialization`, `email`
 - A doctor can handle **multiple appointments**
 
-### 3. **Appointment**
+ 3. **Appointment**
 - `id`, `date`, `time`, `status`
 - Linked to one **Patient** and one **Doctor**
 
-### 4. **Invoice**
+ 4. **Invoice**
 - `id`, `amount`, `dateIssued`
 - Each invoice is linked to **one appointment**
 
@@ -69,7 +69,7 @@ src/
 
 ---
 
-## ⚙️ Features / Functionalities
+ Features / Functionalities
 ✅ CRUD operations for **Patients**, **Doctors**, and **Appointments**  
 ✅ Automatic generation of **Invoices** for appointments  
 ✅ Validation of input data and error handling  
@@ -77,15 +77,15 @@ src/
 
 ---
 
-## 🚀 How to Run the Project
+ How to Run the Project
 
-### 1️⃣ Prerequisites
+ .Prerequisites
 - Java 17 or higher
 - Maven
 - MySQL Database
 - IDE (IntelliJ, STS, or VS Code)
 
-### 2️⃣ Steps
+. Steps
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/clinic-management-system.git
@@ -107,7 +107,7 @@ src/
 
 ---
 
-## 🧪 Postman Endpoints Examples
+. Postman Endpoints Examples
 
 | Method | Endpoint | Description |
 |--------|-----------|-------------|
@@ -124,15 +124,15 @@ src/
 
 ---
 
-## 👩‍💻 Collaborator
+. Collaborator
 **Validator (Teacher):** [awadi.hatem@gmail.com](mailto:awadi.hatem@gmail.com)
 
 ---
 
-## 🏁 Conclusion
+. Conclusion
 This project showcases the use of **Spring Boot** and **REST APIs** to develop a modular, testable, and scalable backend for healthcare operations management.
 
 ---
 
-## 📄 License
+. License
 This project is for academic purposes as part of the DS1 module at [Your Institution Name].

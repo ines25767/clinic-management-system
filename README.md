@@ -1,138 +1,137 @@
- Clinic Management System – Spring Boot Project
+Clinic Management API (Spring Boot + REST + MySQL)
 
- Project Overview
-This project is a **Clinic Management System** developed as part of the **DS1 Web Development – Spring Boot** module.  
-It aims to manage and organize essential clinic operations such as **patients, doctors, appointments, and invoices** using a RESTful backend architecture.
+A complete Clinic Management API built using Spring Boot, implementing CRUD operations for:
 
-The project demonstrates complete CRUD functionality, entity relationships, and API testing with Postman.
+✔ Patients
+✔ Doctors
+✔ Appointments
+✔ Prescriptions
 
----
+With relationships between entities, REST endpoints, and JSON responses.
 
- Objective
-To design and implement a **Spring Boot REST API** that allows efficient management of clinic data, showcasing:
-- Entity modeling and relationships
-- CRUD operations
-- Data validation and error handling
-- Testing APIs using Postman
+📌 1. Project Overview
 
----
+This RESTful API allows a clinic to manage appointments, patients, doctors and prescriptions.
 
- Technologies Used
-- **Spring Boot** (Backend framework)
-- **Spring Data JPA** (ORM for database operations)
-- **MySQL** (Relational database)
-- **Lombok** (for cleaner entity code)
-- **Postman** (for API testing)
-- **Maven** (for dependency management)
-- **Java 17+** (programming language)
+ Features:
 
----
+Add, update, delete, list Patients & Doctors
 
- Project Structure
-```
-src/
- ├─ main/java/com/example/clinic/
- │   ├─ model/           # Entity classes (Patient, Doctor, Appointment, Invoice)
- │   ├─ repository/      # JpaRepository interfaces
- │   ├─ service/         # Business logic and validation
- │   ├─ controller/      # REST API endpoints
- │   └─ ClinicApplication.java  # Main Spring Boot application
- ├─ resources/
- │   ├─ application.properties  # Database configuration
- └─ test/
-```
+Schedule and manage Appointments
 
----
+Add/Update/Delete Prescriptions for an Appointment
 
- Entities and Relationships
+Handles relationships:
 
- 1. **Patient**
-- `id`, `name`, `age`, `gender`, `phoneNumber`
-- A patient can have **multiple appointments**
+One Patient → Many Appointments
 
- 2. **Doctor**
-- `id`, `name`, `specialization`, `email`
-- A doctor can handle **multiple appointments**
+One Doctor → Many Appointments
 
- 3. **Appointment**
-- `id`, `date`, `time`, `status`
-- Linked to one **Patient** and one **Doctor**
+One Appointment → Many Prescriptions
 
- 4. **Invoice**
-- `id`, `amount`, `dateIssued`
-- Each invoice is linked to **one appointment**
+Uses Spring JPA, Hibernate, MySQL for persistence
 
-**Relationships:**
-- OneToMany → Doctor → Appointment  
-- OneToMany → Patient → Appointment  
-- OneToOne → Appointment → Invoice
+API tested using Postman
 
----
+ 2. Technologies Used
+Technology	Description
+Java 17	Programming Language
+Spring Boot 3	Backend Framework
+Spring Data JPA	ORM & Database interaction
+MySQL	Database
+Hibernate	JPA Implementation
+Lombok (optional)	Reduce boilerplate code
+Postman	API Testing
+Maven	Dependency Management
+🗂️ 3. ER Diagram (Conceptual)
+Patient (1) --------- (∞) Appointment (∞) --------- (1) Doctor
+                              |
+                            (∞)
+                       Prescription
 
- Features / Functionalities
-✅ CRUD operations for **Patients**, **Doctors**, and **Appointments**  
-✅ Automatic generation of **Invoices** for appointments  
-✅ Validation of input data and error handling  
-✅ RESTful APIs tested via **Postman**  
+📦 4. Entities & Relationships
+Entity	Main Fields	Relationship
+Patient	id, firstName, lastName, email, phone	One-to-Many with Appointments
+Doctor	id, firstName, lastName, email, specialty	One-to-Many with Appointments
+Appointment	id, dateTime, reason, status(SCHEDULED...)	Many-to-One (Patient & Doctor), One-to-Many Prescriptions
+Prescription	id, medicine, dosage	Many-to-One with Appointment
+ 5. API Endpoints
+ Patients API
+Method	Endpoint	Description
+GET	/api/patients	Get all patients
+GET	/api/patients/{id}	Get patient by ID
+POST	/api/patients	Add new patient
+PUT	/api/patients/{id}	Update patient
+DELETE	/api/patients/{id}	Delete patient
+ Doctors API
+Method	Endpoint	Description
+GET	/api/doctors	Get all doctors
+POST	/api/doctors	Add new doctor
+ Appointments API
+Method	Endpoint	Description
+GET	/api/appointments	List all appointments
+POST	/api/appointments	Create appointment
+GET	/api/appointments/{id}	Get appointment details
+PUT	/api/appointments/{id}	Update appointment
+DELETE	/api/appointments/{id}	Cancel/Delete appointment
+ Prescriptions API
+Method	Endpoint	Description
+GET	/api/prescriptions?appointmentId=1	List prescriptions for appointment
+POST	/api/prescriptions?appointmentId=1	Add prescription to appointment
+PUT	/api/prescriptions/{id}	Update prescription
+DELETE	/api/prescriptions/{id}	Delete prescription
+ 6. How to Run the Project
+ Step 1: Clone the Repository
+git clone https://github.com/inesjemour/clinic-management.git
+cd clinic-management
 
----
+ Step 2: Update application.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/clinic_db
+spring.datasource.username=root
+spring.datasource.password=pwd
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
 
- How to Run the Project
+ Step 3: Run MySQL Server
+ Step 4: Run the Application
+mvn spring-boot:run
 
- .Prerequisites
-- Java 17 or higher
-- Maven
-- MySQL Database
-- IDE (IntelliJ, STS, or VS Code)
 
-. Steps
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/clinic-management-system.git
-   ```
-2. Open the project in your IDE.
-3. Configure your MySQL connection in `application.properties`:
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/clinicdb
-   spring.datasource.username=root
-   spring.datasource.password=yourpassword
-   spring.jpa.hibernate.ddl-auto=update
-   spring.jpa.show-sql=true
-   ```
-4. Run the project with:
-   ```bash
-   mvn spring-boot:run
-   ```
-5. Test the endpoints in Postman.
+or in Eclipse → Right-click ClinicApplication.java → Run As → Spring Boot App
 
----
+ 7. Testing with Postman
 
-. Postman Endpoints Examples
+Example POST request to create an appointment:
 
-| Method | Endpoint | Description |
-|--------|-----------|-------------|
-| GET | `/api/patients` | Get all patients |
-| POST | `/api/patients` | Add new patient |
-| GET | `/api/patients/{id}` | Get patient by ID |
-| PUT | `/api/patients/{id}` | Update patient |
-| DELETE | `/api/patients/{id}` | Delete patient |
-| GET | `/api/doctors` | Get all doctors |
-| POST | `/api/appointments` | Create appointment |
-| GET | `/api/invoices` | List invoices |
+POST http://localhost:8081/api/appointments
+{
+  "dateTime": "2025-11-10T10:30:00",
+  "reason": "General Checkup",
+  "doctorId": 1,
+  "patientId": 1
+}
 
-*(Include screenshots of successful Postman tests in your slides or GitHub repo.)*
+ 8. GitHub Submission Instructions
 
----
+Initialize the Git repository in your project:
 
-. Collaborator
-**Validator (Teacher):** [awadi.hatem@gmail.com](mailto:awadi.hatem@gmail.com)
+git init
+git add .
+git commit -m "Initial commit - Clinic API"
 
----
+Add GitHub remote:
 
-. Conclusion
-This project showcases the use of **Spring Boot** and **REST APIs** to develop a modular, testable, and scalable backend for healthcare operations management.
+git remote add origin https://github.com/inesjemour/clinic-management.git
+git push -u origin main
 
----
 
-. License
-This project is for academic purposes as part of the DS1 module at [Your Institution Name].
+Add your teacher as collaborator:
+
+Go to GitHub → Repository → Settings → Collaborators
+
+Add: awadi.hatem@gmail.com
+
+ 9. Author
+
+ines jemour
+Student | Full-Stack Developer
